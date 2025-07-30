@@ -2,7 +2,7 @@ def player_move(board, symbol):
     is_valid_input = False
     while not is_valid_input:
         cell = input("Enter row (R) and column (C) index (0-2) together like \"RC\": ")
-        if board[cell[0], cell[1]] == " " and input_checker(cell):
+        if board[cell[0], cell[1]] == "-" and input_checker(cell):
             board[cell[0], cell[1]] = symbol
             is_valid_input = True
         else:
