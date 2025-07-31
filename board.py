@@ -58,10 +58,9 @@ def check_diagonal(board):
 
 
 def is_board_full(board):
-    for i in range(3):
-        for j in range(3):
-            if board[i][j] == "-":
-                return False
+    for row in board:
+        if "-" in row:
+            return False
 
     return True
 
