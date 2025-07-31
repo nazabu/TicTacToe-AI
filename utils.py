@@ -17,3 +17,8 @@ def initialize_game():
 
     return board, current_turn, game_mode, symbols
 
+def switch_turn(current_turn, game_mode):
+    if game_mode == "AI":
+        return 'Player' if current_turn == 'AI' else 'AI'
+    else:
+        return 'Player2' if current_turn == 'Player1' else "Player1"
