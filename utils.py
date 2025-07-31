@@ -4,7 +4,7 @@ def initialize_game():
     board = create_board()
     game_mode = input("Who would you like to play against (AI or P): ")
     if game_mode == "AI":
-        player_first = input("Does player go first? (Y/N): ")
+        player_first = input("Do you want to go first? (Y/N): ")
         if player_first == "Y":
             symbols = {"player": 'x', "ai": 'o'}
             current_turn = "Player"
