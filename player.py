@@ -12,7 +12,7 @@ def input_checker(input):
     if len(input) != 2:
         return False
 
-    index = [0,1,2]
+    index = ["0","1","2"]
     if input[0] not in index or input[1] not in index:
         return False
 
