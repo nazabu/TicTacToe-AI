@@ -1,5 +1,5 @@
 def create_board():
-    board = [["-"]*3]*3
+    board = [["-"]*3 for _ in range(3)]
     return board
 
 def display_board(board):
@@ -26,7 +26,7 @@ winner_symbol = ""
 def check_rows(board):
     for row in board:
         string_row = row[0] + row[1] + row[2]
-        if string_row == "xxx" or "ooo":
+        if string_row == "xxx" or string_row == "ooo":
             global winner_symbol
             winner_symbol += string_row[0]
             return True
@@ -39,7 +39,7 @@ def check_columns(board):
         for j in range(3):
             string_column += board[j][i]
 
-        if string_column == "xxx" or "ooo":
+        if string_column == "xxx" or string_column == "ooo":
             global winner_symbol
             winner_symbol += string_column[0]
             return True
@@ -49,7 +49,7 @@ def check_columns(board):
 def check_diagonal(board):
     string_arr_diagonal = [board[0][0] + board[1][1] + board[2][2], board[0][2] + board[1][1] + board[2][0]]
     for string_diagonal in string_arr_diagonal:
-        if string_diagonal == "xxx" or "ooo":
+        if string_diagonal == "xxx" or string_diagonal == "ooo":
             global winner_symbol
             winner_symbol += string_diagonal[0]
             return True

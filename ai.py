@@ -1,39 +1,48 @@
+import math
 from board import check_winner, is_board_full
 
-def ai_move(board, ai_symbol, human_symbol):
-    _, row, col = minimax(board, True, ai_symbol, human_symbol)
-    board[row][col] = ai_symbol
+AI = "X"
+HUMAN = "O"
 
-def minimax(board, is_ai_turn, ai_symbol, human_symbol):
+def ai_move(board, ai_symbol, human_symbol):
+    """
+    Finds and makes the best move for the AI on a 2D board.
+    """
+    _, best_row, best_col = minimax(board, ai_symbol, human_symbol, is_ai_turn=True)
+    board[best_row][best_col] = ai_symbol
+
+
+def minimax(board, ai_symbol, human_symbol, is_ai_turn):
     winner = check_winner(board)
     if winner == ai_symbol:
-        return 1, None, None
+        return 10, None, None
     elif winner == human_symbol:
-        return -1, None, None
+        return -10, None, None
     elif is_board_full(board):
         return 0, None, None
 
-    if is_ai_turn:
-        best_score = float('-inf')
-    else:
-        best_score = float('inf')
-
+    best_score = -math.inf if is_ai_turn else math.inf
     best_move = (None, None)
 
     for row in range(3):
         for col in range(3):
             if board[row][col] == "-":
+                # Simulate move
                 board[row][col] = ai_symbol if is_ai_turn else human_symbol
 
-                score, _, _ = minimax(board, not is_ai_turn, ai_symbol, human_symbol)
+                score, _, _ = minimax(board, ai_symbol, human_symbol, not is_ai_turn)
 
-                board[row][col] = '-'
+                # Undo move
+                board[row][col] = "-"
 
-                if is_ai_turn and score > best_score:
-                    best_score = score
-                    best_move = (row, col)
-                elif not is_ai_turn and score < best_score:
-                    best_score = score
-                    best_move = (row, col)
+                # Choose best move based on turn
+                if is_ai_turn:
+                    if score > best_score:
+                        best_score = score
+                        best_move = (row, col)
+                else:
+                    if score < best_score:
+                        best_score = score
+                        best_move = (row, col)
 
     return best_score, best_move[0], best_move[1]

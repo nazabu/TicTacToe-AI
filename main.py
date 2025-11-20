@@ -6,6 +6,7 @@ from ai import ai_move
 board, current_turn, game_mode, symbols = initialize_game()
 
 while True:
+    break
     display_board(board)
 
     if game_mode == "AI":
