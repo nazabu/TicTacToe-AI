@@ -1,66 +1,70 @@
+"""
+Board representation and game-state logic for Tic-Tac-Toe.
+
+The board is a flat list of 9 cells (indices 0-8) laid out as:
+
+    0 | 1 | 2
+   -----------
+    3 | 4 | 5
+   -----------
+    6 | 7 | 8
+
+Each cell is ' ' (empty), 'X', or 'O'.
+"""
+
+WIN_LINES = [
+    (0, 1, 2), (3, 4, 5), (6, 7, 8),  # rows
+    (0, 3, 6), (1, 4, 7), (2, 5, 8),  # columns
+    (0, 4, 8), (2, 4, 6),              # diagonals
+]
+
+
 def create_board():
-    board = [["-"]*3 for _ in range(3)]
-    return board
+    return [' '] * 9
+
 
 def display_board(board):
-    for row in board:
-        print(f"{row[0]} | {row[1]} | {row[2]}")
+    for i in range(3):
+        row = board[i * 3:(i + 1) * 3]
+        print(' ' + ' | '.join(row))
+        if i < 2:
+            print('-----------')
+    print()
+
+
+def display_positions():
+    """Show the index of each cell so the player knows what to type."""
+    for i in range(3):
+        row = [str(i * 3 + j) for j in range(3)]
+        print(' ' + ' | '.join(row))
+        if i < 2:
+            print('-----------')
+    print()
+
+
+def available_moves(board):
+    return [i for i, cell in enumerate(board) if cell == ' ']
+
+
+def make_move(board, position, symbol):
+    board[position] = symbol
+
+
+def undo_move(board, position):
+    board[position] = ' '
+
 
 def check_winner(board):
-    has_won = check_rows(board)
-    if has_won:
-        return winner_symbol
-
-    has_won = check_columns(board)
-    if has_won:
-        return winner_symbol
-
-    has_won = check_diagonal(board)
-    if has_won:
-        return winner_symbol
-
+    """Return 'X', 'O', or None."""
+    for a, b, c in WIN_LINES:
+        if board[a] != ' ' and board[a] == board[b] == board[c]:
+            return board[a]
     return None
-
-winner_symbol = ""
-
-def check_rows(board):
-    for row in board:
-        string_row = row[0] + row[1] + row[2]
-        if string_row == "xxx" or string_row == "ooo":
-            global winner_symbol
-            winner_symbol += string_row[0]
-            return True
-
-    return False
-
-def check_columns(board):
-    for i in range(3):
-        string_column = ""
-        for j in range(3):
-            string_column += board[j][i]
-
-        if string_column == "xxx" or string_column == "ooo":
-            global winner_symbol
-            winner_symbol += string_column[0]
-            return True
-
-    return False
-
-def check_diagonal(board):
-    string_arr_diagonal = [board[0][0] + board[1][1] + board[2][2], board[0][2] + board[1][1] + board[2][0]]
-    for string_diagonal in string_arr_diagonal:
-        if string_diagonal == "xxx" or string_diagonal == "ooo":
-            global winner_symbol
-            winner_symbol += string_diagonal[0]
-            return True
-
-    return False
 
 
 def is_board_full(board):
-    for row in board:
-        if "-" in row:
-            return False
+    return ' ' not in board
 
-    return True
 
+def is_game_over(board):
+    return check_winner(board) is not None or is_board_full(board)
