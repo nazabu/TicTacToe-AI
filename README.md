@@ -41,7 +41,7 @@ Enter the number of the cell you want to claim.
 
 Tic-Tac-Toe belongs to the class of **combinatorial games**: two players alternate turns, both players see the full board state, there is no element of chance, and the game must end in finitely many moves.
 
-These properties guarantee that a **game tree** — a rooted tree of every possible sequence of moves — is finite and fully enumerable. The upper bound on board states is 9! = 362,880 (the number of ways to fill 9 cells in sequence), though symmetry and early termination reduce the actually reachable states to 5,478 unique positions.
+These properties guarantee that a **game tree** is finite and fully enumerable. The upper bound on board states is 9! = 362,880 (the number of ways to fill 9 cells in sequence), though symmetry and early termination reduce the actually reachable states to 5,478 unique positions.
 
 Because the game tree is finite and fully observable, a theorem from combinatorial game theory (proved by Zermelo in 1913) tells us:
 
