@@ -1,6 +1,6 @@
 # Tic-Tac-Toe AI
 
-An unbeatable Tic-Tac-Toe bot. The AI uses the **Minimax algorithm with Alpha-Beta Pruning** to play perfectly — it will **never lose**. The best any opponent can achieve is a draw.
+An unbeatable Tic-Tac-Toe bot. The AI uses the **Minimax algorithm with Alpha-Beta Pruning** to play perfectly. It **never loses**. The best any opponent can achieve is a draw.
 
 ## How to Play
 
